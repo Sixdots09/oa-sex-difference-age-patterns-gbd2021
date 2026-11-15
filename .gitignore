@@ -1,0 +1,20 @@
+# GBD input files must not be redistributed (IHME data-use agreement): keep them out of the repository
+data/raw/*
+!data/raw/.gitkeep
+# large raster figures can be regenerated; the vector PDFs are kept
+outputs/figures/*.tif
+# local files
+.DS_Store
+.Rhistory
+.RData
+.Rproj.user/
+__pycache__/
+*.pyc
+# Temporary plots, logs and local validation copies
+Rplots.pdf
+*.log
+.validation/
+# Downloaded input files, even if accidentally placed outside data/raw/
+GBD2021_*.csv
+INFLECTION_CI__*.csv
+EAPC_TOTAL__*.csv
