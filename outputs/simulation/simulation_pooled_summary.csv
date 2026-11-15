@@ -1,0 +1,13 @@
+"truth","noise_multiplier","ar1_rho","simulated_curves","p_changepoint_preferred","p_non_changepoint_preferred","p_inconclusive"
+"smooth",1,0,2000,0.0055,0.901,0.0935
+"smooth",1,0.5,2000,0.0015,0.9535,0.045
+"smooth",1,0.8,2000,0,0.9905,0.0095
+"smooth",2,0,2000,0.0285,0.7565,0.215
+"smooth",2,0.5,2000,0.022,0.815,0.163
+"smooth",2,0.8,2000,0.0085,0.9065,0.085
+"changepoint",1,0,2000,0.725,0.0575,0.2175
+"changepoint",1,0.5,2000,0.733,0.0665,0.2005
+"changepoint",1,0.8,2000,0.8355,0.0435,0.121
+"changepoint",2,0,2000,0.4475,0.1395,0.413
+"changepoint",2,0.5,2000,0.444,0.1745,0.3815
+"changepoint",2,0.8,2000,0.59,0.126,0.284
