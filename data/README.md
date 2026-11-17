@@ -41,6 +41,37 @@ Which analysis uses which file:
 - `age_sex_*`: prevalence-based bounds and DALYs per prevalent case (script 08);
 - `country_*`, `country_both_sexes_overall` and `sdi`: country summaries and SDI correlations (script 09).
 
+## Source links supplied during revision
+
+These links were supplied during revision as query entry points and a release page, not retained export logs. The burden queries are for overall osteoarthritis. Use the GBD 2021 release and check all selections against Part A.
+
+| Query or release page | Official link |
+|---|---|
+| Global age-specific estimates, both sexes (age.csv) | https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/5c6a84d1ca9192130ba6f40a26d15cea |
+| Global age-specific estimates by sex (age+sex.csv) | https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/1ff2b8f37268f1361896b5fa61900373 |
+| Global all-age and age-standardized estimates, both sexes (global.csv) | https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/d4328e31b98cdf7bd65e5015e1f49f7f |
+| Global all-age and age-standardized estimates by sex (sex.csv) | https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/aae83a47ef9add1230138a0e942f8f3d |
+| Country estimates, query 1 (also the both-sex country.csv input) | https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/213322da94b0e51603de11f7dadfdef9 |
+| Country estimates, query 2 | https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/f17f6090ced284f8b009c6f7e5343fd3 |
+| Country estimates, query 3 | https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/6be068cc9b013ee0bd448c24da4472c5 |
+| Supplied GHDx source page for GBD 2021 Socio-demographic Index, 1950–2021 | https://ghdx.healthdata.org/record/global-burden-disease-study-2021-gbd-2021-socio-demographic-index-sdi-1950%E2%80%932021 |
+
+## Selection and merging of the analysed inputs
+
+Categories. Repeat the burden queries using the same options and change Cause to osteoarthritis (628), osteoarthritis hip (1014), osteoarthritis knee (1015), osteoarthritis hand (1016) or osteoarthritis other (1017).
+
+Age-by-sex files. The supplied age+sex query includes Both as well as Female and Male. Retain Female and Male only for each archived category-specific age+sex input (7,680 records).
+
+Main age-trajectory input. From the five category-specific age+sex files, retain DALYs, Number and Rate, Female and Male, and ages 30–34 through ≥95 years. Concatenate the five categories to recover the 8,960 record keys in INFLECTION_CI__OA_and_4subOAs_sex_age_adjust.csv. The model-fitting exclusions remain as stated in Part C.
+
+Global burden and EAPC input. Combine age.csv, age+sex.csv, global.csv and sex.csv for all five categories. Retain prevalence and DALYs; ages ≥30 years, All ages and Age-standardized; Number and Rate for age-specific and all-age records; and Rate for age-standardized records. Retain Female, Male and Both as appropriate to these queries. This recovers the 29,760 record keys in EAPC_TOTAL__sex_differeces_final_prevalece_DALYS.csv. Keep the analysis columns for measure, location, sex, age, cause, metric, year, val, lower and upper.
+
+Country inputs. For each category, combine country queries 1–3, matching the sex and other filters to Part A, and check record keys for duplicates and completeness (176,256 records). Query 1 also supplies the overall-osteoarthritis both-sex country.csv input (58,752 records) used to derive population weights.
+
+Comparison of exports. Match measure, location, sex, age, cause, metric and year before comparing val, lower and upper. The local reconstruction recovers record keys; small rounding differences remain between category-specific and derived files, and historical rounding steps were not retained. These local checks do not complete the official-source comparisons noted above.
+
+Fresh official GBD exports have not been compared with the analysed inputs. The corresponding official SDI-to-local-file limitation is stated below.
+
 ## File format
 
 GBD files are comma-separated exports of the GBD Results tool with one estimate per row. The scripts need the columns
@@ -51,6 +82,8 @@ The SDI analysis input is a long table with three columns: `location`, `year` an
 It is prepared from a separate wide table, not a GBD Results burden query.
 
 ## SDI source and conversion
+
+Supplied release page: [GBD 2021 Socio-demographic Index, 1950–2021](https://ghdx.healthdata.org/record/global-burden-disease-study-2021-gbd-2021-socio-demographic-index-sdi-1950%E2%80%932021).
 
 The archived wide file is `GBD2021_SHARED__GBD_SDI_1990-2021.csv`:
 
