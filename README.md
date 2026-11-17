@@ -131,10 +131,9 @@ copies. The comparison checks 25 CSV files, with exact checks for classification
 selected changepoint ages and simulation counts. The documented leverage-tie
 reporting change is handled separately.
 
-**Data availability limit:** the local SDI preparation is reproducible, but its
-original official download record has not been recovered. A successful run on
-archived inputs is not proof that an external reader can independently retrieve
-an identical official SDI source. See `data/README.md`.
+**Data availability limit:** original export logs were not retained, and fresh official GBD exports and the official SDI source file have not been verified against the local inputs. Supplied query links, the SDI release page and reconstructed preparation steps are in `data/README.md` and Table S2, Parts E–F.
+
+The 17 November 2026 update adds source documentation only. Analysis code, input-file identifiers and checksums, derived CSV files, model classifications and figures are unchanged. The source notes in Table S2 were added after table generation; retain them when regenerating the workbook with the unchanged table-building script.
 
 ## Data source and terms of use
 
