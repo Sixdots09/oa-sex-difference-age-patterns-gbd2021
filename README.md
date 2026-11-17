@@ -23,7 +23,7 @@ natural spline, cubic polynomial and a generalized additive model (GAM).
 | `run_all.sh` | Runs everything in order |
 
 **Not included:** the GBD 2021 files downloaded from IHME. The IHME data-use agreement does not allow them to be
-redistributed. The 13 estimate files come from the GBD Results tool. The separate SDI table and its unrecovered download record are explained in `data/README.md`. The repository contains selected article tables, derived contrasts and summary statistics; it does not include the downloaded input datasets.
+redistributed. The 13 estimate files come from the GBD Results tool. The separate SDI table and its preparation are explained in `data/README.md`. The repository contains selected article tables, derived contrasts and summary statistics; it does not include the downloaded input datasets.
 
 ## Requirements
 
@@ -131,9 +131,9 @@ copies. The comparison checks 25 CSV files, with exact checks for classification
 selected changepoint ages and simulation counts. The documented leverage-tie
 reporting change is handled separately.
 
-**Data availability limit:** original export logs were not retained, and fresh official GBD exports and the official SDI source file have not been verified against the local inputs. Supplied query links, the SDI release page and reconstructed preparation steps are in `data/README.md` and Table S2, Parts E–F.
+The original export records were not retained, so query specifications were reconstructed from the analysed files. Official query links, the SDI release page and input-preparation steps are in `data/README.md` and Table S2, Parts E–F.
 
-The 17 November 2026 update adds source documentation only. Analysis code, input-file identifiers and checksums, derived CSV files, model classifications and figures are unchanged. The source notes in Table S2 were added after table generation; retain them when regenerating the workbook with the unchanged table-building script.
+The 17 November 2026 documentation update synchronizes the README files and Table S2 with the revised submission materials. Analysis code, input-file identifiers and checksums, derived CSV files, model classifications and figures are unchanged. The source notes in Table S2 were edited after table generation; retain them when regenerating the workbook with the unchanged table-building script.
 
 ## Data source and terms of use
 
