@@ -175,14 +175,14 @@ sheet = new_sheet(wb, 'Table S2', 'Table S2. Data sources, query specifications,
 add_part(sheet, 'Part A. Query specifications (GBD Results tool, GBD 2021 release; https://vizhub.healthdata.org/gbd-results/)')
 five = 'Osteoarthritis (628), hip (1014), knee (1015), hand (1016), other (1017)'
 add_table(sheet, ['Input', 'Measure (measure_id)', 'Metric (metric_id)', 'Cause (cause_id)', 'Location (location_id)', 'Age (age_id)', 'Sex (sex_id)', 'Year', 'Records'], [['Global DALYs by age and sex (age-trajectory analyses)', 'DALYs (2)', 'Number (1), Rate (3)', five, 'Global (1)', '30–34 to 90–94 years (11–20, 30, 31, 32); ≥95 years (235)', 'Male (1), Female (2)', '1990–2021', 8960], ['Global prevalence and DALYs by sex and age (overall burden, EAPC, Table 1, Figure 1)', 'Prevalence (5), DALYs (2)', 'Number (1), Rate (3); age-standardized: Rate only', five, 'Global (1)', '30–34 to ≥95 years (11–20, 30, 31, 32, 235); All ages (22); Age-standardized (27)', 'Male (1), Female (2), Both (3)', '1990–2021', 29760], ['Global DALYs, prevalence and incidence by age and sex, one file per category (prevalence-based bounds)', 'DALYs (2), Prevalence (5), Incidence (6)', 'Number (1), Rate (3)', 'One of 628, 1014, 1015, 1016, 1017 per file', 'Global (1)', '<5 to ≥95 years (1, 6–20, 30, 31, 32, 235)', 'Male (1), Female (2)', '1990–2021', 7680], ['Country-level estimates by sex, one file per category (country summaries, SDI analysis)', 'DALYs (2), Prevalence (5), Incidence (6)', 'All ages: Number (1), Rate (3); Age-standardized: Rate (3)', 'One of 628, 1014, 1015, 1016, 1017 per file', '204 countries and territories', 'All ages (22); Age-standardized (27)', 'Male (1), Female (2), Both (3)', '1990–2021', 176256], ['Country-level estimates, both sexes, overall osteoarthritis (population back-calculated as number ÷ rate)', 'DALYs (2), Prevalence (5), Incidence (6)', 'All ages: Number (1), Rate (3); Age-standardized: Rate (3)', 'Osteoarthritis (628)', '204 countries and territories', 'All ages (22); Age-standardized (27)', 'Both (3)', '1990–2021', 58752], ['Socio-demographic Index (GBD 2021 SDI table)', 'SDI', '–', '–', 'All GBD locations in the table', '–', '–', '1990–2021', 23552]], fmts={'Records': '#,##0'})
-add_notes(sheet, ['The original query and export records have not been recovered. These specifications were reconstructed from the GBD identifiers and labels present in the analysed files.', 'The SDI wide-to-long conversion is documented in data/README.md. The original SDI download record has not been recovered; the official-source-to-local-file link remains unverified.', 'Records = rows in each analysed file (per file where one file per category). Any re-extraction must use the GBD 2021 release, because estimates for the same years are revised between GBD rounds.'])
+add_notes(sheet, ["Query specifications are documented using the GBD identifiers and labels in the analysed files. Part E lists links from IHME's original download-notification emails; Part F describes input preparation.", 'The SDI wide-to-long conversion is described in Part F.', 'Records = rows in each analysed file (per file where one file per category). Any re-extraction must use the GBD 2021 release, because estimates for the same years are revised between GBD rounds.'])
 add_part(sheet, 'Part B. Files analysed')
 inputs = pd.read_csv(os.path.join('data', 'input_files.csv'))
 values_7 = []
 for r in inputs.itertuples():
     values_7.append([r.file_name, r.description, r.records, r.bytes, r.sha256])
 add_table(sheet, ['File name', 'Content', 'Records', 'Size (bytes)', 'SHA-256'], values_7, fmts={'Records': '#,##0', 'Size (bytes)': '#,##0'})
-add_notes(sheet, ['File names are those of the analysed files. The files themselves are not redistributed under the IHME data-use agreement; the checksums allow a re-extraction to be verified.'])
+add_notes(sheet, ["File names and SHA-256 checksums identify the analysed files, which are not redistributed under the IHME data-use agreement. Row order, encoding and number formatting change a file's checksum, so a new export should be compared with these files by record keys and values (Part F)."])
 add_part(sheet, 'Part C. Data flow by analysis')
 formats_8 = {}
 for h in ['Records expected', 'Records observed', 'Records excluded', 'Records analysed']:
@@ -196,6 +196,55 @@ for x in names:
     values_9.append(list(x))
 add_table(sheet, ['Name in one file', 'Harmonized name'], values_9)
 finish_sheet(sheet)
+# Source links and preparation notes.
+source_sheet = sheet['worksheet']
+source_rows = [
+    ['A68', 'Part E. Official GBD 2021 query links', None],
+    ['A69', "The GBD 2021 query links and the SDI source link below were provided in IHME's original download-notification emails. Queries are shown for overall osteoarthritis; Part F describes how the other categories and the analysed files were obtained.", None],
+    ['A70', 'Query or release page', None],
+    ['C70', 'Official link', None],
+    ['A71', 'Global age-specific estimates, both sexes (age.csv)', None],
+    ['C71', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/5c6a84d1ca9192130ba6f40a26d15cea', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/5c6a84d1ca9192130ba6f40a26d15cea'],
+    ['A72', 'Global age-specific estimates by sex (age+sex.csv)', None],
+    ['C72', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/1ff2b8f37268f1361896b5fa61900373', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/1ff2b8f37268f1361896b5fa61900373'],
+    ['A73', 'Global all-age and age-standardized estimates, both sexes (global.csv)', None],
+    ['C73', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/d4328e31b98cdf7bd65e5015e1f49f7f', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/d4328e31b98cdf7bd65e5015e1f49f7f'],
+    ['A74', 'Global all-age and age-standardized estimates by sex (sex.csv)', None],
+    ['C74', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/aae83a47ef9add1230138a0e942f8f3d', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/aae83a47ef9add1230138a0e942f8f3d'],
+    ['A75', 'Country estimates, query 1 (also the both-sex country.csv input)', None],
+    ['C75', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/213322da94b0e51603de11f7dadfdef9', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/213322da94b0e51603de11f7dadfdef9'],
+    ['A76', 'Country estimates, query 2', None],
+    ['C76', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/f17f6090ced284f8b009c6f7e5343fd3', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/f17f6090ced284f8b009c6f7e5343fd3'],
+    ['A77', 'Country estimates, query 3', None],
+    ['C77', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/6be068cc9b013ee0bd448c24da4472c5', 'https://gbd2021.healthdata.org/gbd-results?params=gbd-api-2021-permalink/6be068cc9b013ee0bd448c24da4472c5'],
+    ['A78', 'GHDx page of the GBD 2021 Socio-demographic Index (SDI), 1950–2021', None],
+    ['C78', 'https://ghdx.healthdata.org/record/global-burden-disease-study-2021-gbd-2021-socio-demographic-index-sdi-1950%E2%80%932021', 'https://ghdx.healthdata.org/record/global-burden-disease-study-2021-gbd-2021-socio-demographic-index-sdi-1950%E2%80%932021'],
+    ['A80', 'Part F. Selection and preparation of the analysed inputs', None],
+    ['A81', 'Categories. Repeat the burden queries using the same options and change Cause to osteoarthritis (628), osteoarthritis hip (1014), osteoarthritis knee (1015), osteoarthritis hand (1016) or osteoarthritis other (1017).', None],
+    ['A82', 'Age-by-sex files. The age+sex query returns Female, Male and Both; only Female and Male records are retained in each category-specific age+sex file (7,680 records).', None],
+    ['A83', 'Main age-trajectory input. From the five category-specific age+sex files, retain DALYs, Number and Rate, Female and Male, and ages 30–34 through ≥95 years. Concatenate the five categories to obtain the 8,960 records of INFLECTION_CI__OA_and_4subOAs_sex_age_adjust.csv; the model-fitting exclusions are given in Part C.', None],
+    ['A84', 'Global burden and EAPC input. Combine age.csv, age+sex.csv, global.csv and sex.csv for all five categories. Retain prevalence and DALYs; ages ≥30 years, All ages and Age-standardized; Number and Rate for age-specific and all-age records; and Rate for age-standardized records. Retain Female, Male and Both as appropriate to these queries. This gives the 29,760 records of EAPC_TOTAL__sex_differeces_final_prevalece_DALYS.csv. Keep the analysis columns for measure, location, sex, age, cause, metric, year, val, lower and upper.', None],
+    ['A85', 'Country inputs. For each category, combine country queries 1–3, matching the sex and other filters to Part A, and check record keys for duplicates and completeness (176,256 records). Query 1 also supplies the overall-osteoarthritis both-sex country.csv input (58,752 records) used to derive population weights.', None],
+    ['A86', 'SDI preparation. The GBD 2021 SDI table (GHDx page in Part E) was reshaped from a wide layout (736 locations, one column per year from 1990 to 2021) to 23,552 location-year records; the conversion script is included with the analysis code.', None],
+    ['A87', 'Comparison of exports. Match records on measure, location, sex, age, cause, metric and year, then compare val, lower and upper. Applied to the category-specific files, the steps above reproduce the record keys of the analysed files, and where values could be compared they agree to within one part in 100 million (differences in stored decimal places).', None],
+]
+for address, value, link in source_rows:
+    cell = source_sheet[address]
+    cell.value = value
+    cell.font = f_body
+    cell.alignment = Alignment(wrap_text=True, vertical='top')
+    if link:
+        cell.hyperlink = link
+        cell.font = Font(name=F, size=10, color='0563C1', underline='single')
+for address in ['A68', 'A80']:
+    source_sheet[address].font = f_part
+for address in ['A70', 'C70']:
+    source_sheet[address].font = f_head
+    source_sheet[address].fill = fill_head
+for area in ['A68:I68', 'A69:I69', 'A70:B70', 'A71:B71', 'A72:B72', 'A73:B73', 'A74:B74', 'A75:B75', 'A76:B76', 'A77:B77', 'A78:B78', 'A80:I80', 'A81:I81', 'A82:I82', 'A83:I83', 'A84:I84', 'A85:I85', 'A86:I86', 'A87:I87', 'C70:I70', 'C71:I71', 'C72:I72', 'C73:I73', 'C74:I74', 'C75:I75', 'C76:I76', 'C77:I77', 'C78:I78']:
+    source_sheet.merge_cells(area)
+for row, height in [[68, 24.0], [69, 42.0], [70, 24.0], [71, 36.0], [72, 36.0], [73, 36.0], [74, 36.0], [75, 36.0], [76, 36.0], [77, 36.0], [78, 36.0], [80, 24.0], [81, 48.0], [82, 48.0], [83, 48.0], [84, 66.0], [85, 48.0], [86, 48.0], [87, 48.0]]:
+    source_sheet.row_dimensions[row].height = height
 g3 = pd.read_csv(out('robustness', 'model_comparison_sensitivity_settings.csv'))
 SET = {'Main analysis': 'Main analysis', 'Grid: 2.5-year steps, 45-80': 'Changepoint grid: 2.5-year steps, 45–80 years', 'Grid: age-group midpoints, 42.5-82.5': 'Changepoint grid: age-group midpoints, 42.5–82.5 years', 'Grid: wider range, 40-85': 'Changepoint grid: 5-year steps, 40–85 years', 'Grid: quasi-continuous, 45-80 by 0.5': 'Changepoint grid: 0.5-year steps, 45–80 years', 'Count: changepoint K=4 (no search penalty)': 'Changepoint parameter count K = 4 (no search penalty)', 'Count: GAM = sum(edf)+1': 'GAM parameter count: sum of effective degrees of freedom + 1', 'Count: GAM = full basis k+1': 'GAM parameter count: full basis (k + 1)', 'GAM: REML instead of ML': 'GAM fitted by restricted maximum likelihood', 'GAM: basis k=4': 'GAM basis dimension k = 4', 'GAM: basis k=6': 'GAM basis dimension k = 6', 'Spline knot at 52.5': 'Natural-spline knot at 52.5 years', 'Spline knot at 72.5': 'Natural-spline knot at 72.5 years', 'Threshold: any advantage (0)': 'Information-criterion threshold 0', 'Threshold: strong advantage (6)': 'Information-criterion threshold 6', 'CV: leave two adjacent ages out': 'Cross-validation leaving out two adjacent age groups', 'Drop youngest age group (30-34)': 'Youngest age group (30–34 years) removed', 'Drop oldest age group (90-94)': 'Oldest age group (90–94 years) removed', 'Drop both end groups': 'Both end age groups removed'}
 order = list(g3['analysis'].unique())
