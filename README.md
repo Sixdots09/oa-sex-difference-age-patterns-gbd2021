@@ -131,9 +131,9 @@ copies. The comparison checks 25 CSV files, with exact checks for classification
 selected changepoint ages and simulation counts. The documented leverage-tie
 reporting change is handled separately.
 
-The original export records were not retained, so query specifications were reconstructed from the analysed files. Official query links, the SDI release page and input-preparation steps are in `data/README.md` and Table S2, Parts E–F.
+The GBD 2021 query links and the SDI source link listed in Table S2 were provided in IHME's original download-notification emails. Query specifications, input-preparation steps and the links are documented in `data/README.md` and Table S2, Parts E–F.
 
-The 17 November 2026 documentation update synchronizes the README files and Table S2 with the revised submission materials. Analysis code, input-file identifiers and checksums, derived CSV files, model classifications and figures are unchanged. The source notes in Table S2 were edited after table generation; retain them when regenerating the workbook with the unchanged table-building script.
+The 17 November 2026 source-documentation update identifies the links as those provided in the original IHME download-notification emails. The table-building script now includes the current Table S2 source notes and Parts E–F, so regeneration preserves them. Statistical methods and analysis code, input-file identifiers and checksums, derived CSV files, model classifications and figures are unchanged.
 
 ## Data source and terms of use
 
