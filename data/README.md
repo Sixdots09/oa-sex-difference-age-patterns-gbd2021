@@ -21,7 +21,7 @@ each analysis script apply in every case.
 
 ## Query specifications
 
-The original query and export records were not retained. The specifications below were reconstructed from the GBD
+The GBD 2021 query links and the SDI source link listed in Table S2 were provided in IHME's original download-notification emails. The specifications below document the GBD
 identifiers and labels present in the analysed files. GBD identifiers are in parentheses. Causes: osteoarthritis (628),
 osteoarthritis hip (1014), knee (1015), hand (1016), other (1017). Years: 1990–2021 in every query.
 
