@@ -41,7 +41,7 @@ The original package and manuscript files were not modified.
   inspected. Font rendering differs from the original Linux output; plotted
   estimates, labels and model classifications were retained.
 - The supplementary workbook contains ten sheets. Table S5 lists tied ages and
-  explains the tolerance; Table S2 states the SDI source-record limitation.
+  explains the tolerance. The current Table S2 source documentation is described in the update below.
 - The SDI preparation script reproduced all 23,552 archived location-year-value
   rows exactly after sorting. It retains duplicate location names.
 - No downloaded input file, personal path, credential or local run log is included
@@ -51,10 +51,15 @@ The original package and manuscript files were not modified.
 
 This was a full local computational validation on archived inputs, not a new
 scientific analysis or proof of independent acquisition of all inputs. The
-original official SDI download record has not been recovered; the official
-release-to-local-wide-table link remains unverified. No substitute SDI data were
-introduced. See `data/README.md` and `DATA_TERMS.md`.
+local validation did not independently compare a fresh official SDI download with
+the archived wide table. No substitute SDI data were introduced. See `data/README.md` and `DATA_TERMS.md`.
 
 PDF and workbook metadata and floating-point tails need not be byte-identical
 across environments. The original article figure styling is not a cross-platform
 pixel-identity guarantee.
+
+## Source documentation update, 2026-11-17
+
+The GBD 2021 query links and the SDI source link listed in Table S2 were provided in IHME's original download-notification emails. The author confirmed the email origin of all links in the source-link document, including SDI. This corrects the earlier description of unavailable source links; it does not establish that complete export logs or extraction dates have been recovered.
+
+The table-building script now writes the current source notes and Parts E–F. Only source text and its generation were changed. The update does not repeat the statistical analyses or add an independent official-download-to-input comparison.
